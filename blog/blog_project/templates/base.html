@@ -8,10 +8,24 @@
     <title>Blog App</title>
 </head>
 <body>
-    <h1>Django</h1>
-    <div>
-        {% block content %}
+    <header>
+        <div class="left">
+            <h1><a href="{% url 'home' %}" >Django</a></h1>
+        </div>
+        <div class="right">
+            <a href="{% url 'new_post' %}" >+ New Post</a> 
+        </div>
+    </header>
+        {% if user.is_authenticated %}
+            <p>Hi {{user.username}}! </p>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <p>You are not logged in</p>
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
 
+        {% block content %}
+        
         {% endblock %}
     </div>
 </body>
